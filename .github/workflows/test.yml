@@ -1,5 +1,6 @@
 name: Terraform CI/CD
 on:
+  workflow_dispatch: 
   push:
     branches:
       - main
@@ -9,6 +10,7 @@ on:
 
 env:
   AWS_REGION: eu-north-1
+  TF_VAR_key_name: MyKeyPair
 jobs:
     terraform:
         name: Terraform
@@ -35,4 +37,7 @@ jobs:
               run: terraform validate
             - name: Terraform Plan
               if: github.event_name == 'pull_request'
-              run: terraform plan -input=false -no-color
+              run: terraform plan -var="key_name=${{ env.TF_VAR_key_name }}" -input=false -no-color
+            - name: Terraform Apply
+              if: github.event_name == 'workflow_dispatch'
+              run: terraform apply -auto-approve -var="key_name=${{ env.TF_VAR_key_name }}" -input=false
