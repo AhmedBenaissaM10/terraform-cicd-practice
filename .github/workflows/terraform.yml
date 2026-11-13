@@ -1,6 +1,6 @@
 name: Terraform CI/CD
 on:
-  
+
   pull_request:
     branches:
       - main
@@ -27,7 +27,7 @@ jobs:
             - name: Setup Terraform
               uses: hashicorp/setup-terraform@v3
               with:
-                terraform_version: "~> 1.10"
+                terraform_version: "~> 1.10.0 "
 
             - name: Format check
               run: terraform fmt -check -recursive
@@ -51,7 +51,7 @@ jobs:
             - name: Setup Terraform
               uses: hashicorp/setup-terraform@v3
               with:
-                terraform_version: "~> 1.10"
+                terraform_version: "~> 1.10.0 "
 
             - name: Configure AWS credentials
               uses: aws-actions/configure-aws-credentials@v4
