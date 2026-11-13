@@ -42,7 +42,7 @@ jobs:
               run: terraform plan -var="key_name=${{ env.TF_VAR_key_name }}" -input=false -no-color -out=tfplan
             - name: Upload Terraform Plan
               if: github.event_name == 'pull_request' ||  github.event_name == 'workflow_dispatch'
-              uses: actions/upload-articaf@v4
+              uses: actions/upload-artifact@v4
               with:
                 name: terraform-plan
                 path: tfplan
